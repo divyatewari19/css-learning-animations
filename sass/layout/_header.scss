@@ -1,0 +1,48 @@
+.header {
+    height: 85vh; /* 85% of viewport */
+    background-image: linear-gradient(
+        to right bottom,
+         rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url(../img/hero-small.jpg);
+    background-size: cover; /*fits image inside the box*/
+    background-position: top;
+    position: relative;
+
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+
+    // 1920dpi = apple HD Screen
+    @media (min-resolution: 1920dpi) and (min-width: 37.5em), //600/16 =37.5
+            (min-width: 125em)  { //load large image only on HD screen whose width is greater than 600px OR screens > 2000px
+        //as its of no use loading a big image on smaller screem
+        background-image: linear-gradient(
+        to right bottom,
+         rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url(../img/hero.jpg);
+    }
+
+    @include respond(phone) {
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    }
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem
+    }
+
+    &__logo {
+        height: 3.5rem; /*width will be figured out by the browser automatically*/
+    }
+    
+    &__text-box {
+        position: absolute; /* centering an element */
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* move it -%50 of the current box position*/
+        text-align: center; /* to center button which is inline-block; therefore treated as text*/
+    }
+}
+/* Nest instead
+.header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem
+}*/
